@@ -1,3 +1,12 @@
 dataset/with_mask/**
 dataset/without_mask/**
-venv/
+
+# exclude everything
+dataset/with_mask/*
+dataset/without_mask/*
+
+# exception to the rule
+!dataset/with_mask/.gitkeep
+!dataset/without_mask/.gitkeep
+
+venv
