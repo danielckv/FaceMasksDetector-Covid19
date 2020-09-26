@@ -75,16 +75,18 @@ class VideoProcessor:
             frame = self.video_stream_instance.read()
             frame = imutils.resize(frame, width=400)
 
+            mask_predictions_results = []
             # detect faces in the frame and determine if they are wearing a
             # face mask or not
             (entity_locations, faces) = self.detect_face_in_frame(frame)
 
             # detect mask on each face in the array
-            mask_predictions_results = self.detect_mask_feature.detect_and_predict_mask(faces)
+            if len(faces) > 0:
+                mask_predictions_results = self.detect_mask_feature.detect_and_predict_mask(faces)
 
             # loop over the detected face locations and their corresponding
             # locations
-            for (index, face_box) in enumerate(faces):
+            for (index, face_box) in enumerate(entity_locations):
                 # unpack the bounding box and predictions
                 (startX, startY, endX, endY) = face_box
                 (mask, withoutMask) = mask_predictions_results[index]
