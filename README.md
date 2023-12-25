@@ -1,0 +1,4 @@
+## Detect Face Mask with F-RCNN 
+
+Faster RCNN is an efficient tool for detecting objects in 2D color images. The model was first proposed in TPAMI 2016, and is an improvement over previous works of RCNN and Fast RCNN, by introducing deep regional proposal networks.
+This model is trained on the [WIDER FACE](http://shuoyang1213.me/WIDERFACE/) dataset, which contains 32,203 images and 393,703 faces with a high degree of variability in scale, pose and occlusion as depicted in the sample images below. WIDER FACE dataset is organized based on 61 event classes. For each event class, it randomly selects 40%/10%/50% data as training, validation and testing sets, which contain 393,703/63,960/158,108 images and 5,011,504/394,929/1,231,078 faces, respectively. We use the same training, validation and testing sets as [RetinaFace]()
