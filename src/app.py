@@ -1,33 +1,36 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-import argparse
-import os
-import sys
+import cv2
 
-from utils.env import _prepare_environment
+def detect_face_mask(frame):
+    # Your face mask detection logic goes here
+    # This function should return True if a face mask is detected, and False otherwise
+    pass
 
-# arguemnts:
-# --type: train, test, infer
-# --model: model name
-# --dataset: dataset name
+def main():
+    # Open the webcam
+    cap = cv2.VideoCapture(0)
 
-parser = argparse.ArgumentParser(description='FaceMaskDetector_CkvLabs')
-parser.add_argument('--type', default='train', type=str, help='type of the run')
-parser.add_argument('--model', default='resnet18', type=str, help='model name')
-parser.add_argument('--dataset', default='cifar10', type=str, help='dataset name')
+    while True:
+        # Read a frame from the webcam
+        ret, frame = cap.read()
+
+        # Apply face mask detection
+        face_mask_detected = detect_face_mask(frame)
+
+        # Display the frame with a bounding box indicating whether a face mask is detected
+        if face_mask_detected:
+            cv2.putText(frame, "Face Mask Detected", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+        else:
+            cv2.putText(frame, "No Face Mask Detected", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+
+        cv2.imshow("Face Mask Detector", frame)
+
+        # Exit the loop if 'q' is pressed
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    # Release the webcam and close all windows
+    cap.release()
+    cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    _prepare_environment()
-    
-    device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
-    
-    if args.type == 'train':
-        print('Training...')
-        train(args.model, args.dataset)
-    elif args.type == 'test':
-        print('Testing...')
-        test(args.model, args.dataset)
-    elif args.type == 'infer':
-        print('Infering...')
-        infer(args.model, args.dataset)
-    
+    main()
