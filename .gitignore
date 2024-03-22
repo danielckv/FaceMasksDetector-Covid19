@@ -1,13 +1,5 @@
-dataset/with_mask/**
-dataset/without_mask/**
-
-# exclude everything
-dataset/with_mask/*
-dataset/without_mask/*
-
-# exception to the rule
-!dataset/with_mask/.gitkeep
-!dataset/without_mask/.gitkeep
+dataset/**
+dataset/*
 .idea
 __pycache__
 venv
