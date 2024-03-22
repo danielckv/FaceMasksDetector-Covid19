@@ -1,12 +1,10 @@
-import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
-import parser
 
 if __name__ == "__main__":
     args = parser.parse_args()
-    
+
     train_data_dir = '/path/to/train/data'
     validation_data_dir = '/path/to/validation/data'
     img_width, img_height = 128, 128
@@ -46,8 +44,8 @@ if __name__ == "__main__":
 
     # Compile the model
     model.compile(optimizer='adam',
-                loss='binary_crossentropy',
-                metrics=['accuracy'])
+                  loss='binary_crossentropy',
+                  metrics=['accuracy'])
 
     # Train the model
     epochs = 10
@@ -59,7 +57,4 @@ if __name__ == "__main__":
         validation_steps=validation_generator.samples // batch_size)
 
     # Save the model
-    model.save('face_mask_detector.h5')
-
-    
-    
+    model.save('danielckv-maskdetect-v1.12.h5')

@@ -13,6 +13,7 @@ def process_image(image):
     # TODO: Implement image processing logic
     pass
 
+
 def load_data(data_path):
     """
     Load data from the specified path.
@@ -25,6 +26,7 @@ def load_data(data_path):
     """
     # TODO: Implement data loading logic
     pass
+
 
 def calculate_bounding_box(image):
     """
