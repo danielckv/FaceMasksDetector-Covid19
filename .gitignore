@@ -1,5 +1,5 @@
-dataset/**
-dataset/*
+datasets/**
+datasets/*
 .idea
 __pycache__
 venv
