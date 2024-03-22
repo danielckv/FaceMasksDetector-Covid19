@@ -50,8 +50,8 @@ class MaskDataset(object):
         self.transforms = transforms
         # load all image files, sorting them to
         # ensure that they are aligned
-        self.imgs = list(sorted(os.listdir("/kaggle/input/face-mask-detection/images/")))
-        self.labels = list(sorted(os.listdir("/kaggle/input/face-mask-detection/annotations/")))
+        self.imgs = list(sorted(os.listdir("/images/")))
+        self.labels = list(sorted(os.listdir("/annotations/")))
 
     def __getitem__(self, idx):
         # load images ad masks
