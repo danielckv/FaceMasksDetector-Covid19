@@ -3,3 +3,4 @@ datasets/
 .idea
 __pycache__
 venv
+models/maskdetect-v1.12.h5
