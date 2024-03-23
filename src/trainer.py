@@ -1,15 +1,32 @@
+import click
+from click import parser
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
 
-if __name__ == "__main__":
-    args = parser.parse_args()
 
-    train_data_dir = '/path/to/train/data'
-    validation_data_dir = '/path/to/validation/data'
-    img_width, img_height = 128, 128
-    batch_size = 32
+@click.group()
+@click.option('--debug/--no-debug', default=False)
+@click.pass_context
+def cli_app(ctx, debug):
+    # ensure that ctx.obj exists and is a dict (in case `cli()` is called
+    # by means other than the `if` block below)
+    ctx.ensure_object(dict)
 
+    ctx.obj['DEBUG'] = debug
+
+
+@cli_app.command
+@click.pass_context
+@click.option('--train_data_dir', default='./datasets/train', help='The directory containing the training data.')
+@click.option('--validation_data_dir', default='./datasets/validation',
+              help='The directory containing the validation data.')
+@click.option('--img_width', default=128, help='The width of the input images.')
+@click.option('--img_height', default=128, help='The height of the input images.')
+@click.option('--batch_size', default=32, help='The batch size for training.')
+@click.option('--device', default='mps', help='The device to use for training (cpu, cuda or mps).')
+def train_model(ctx, train_data_dir, validation_data_dir, img_width, img_height, batch_size):
+    click.echo(f"Debug is {'on' if ctx.obj['DEBUG'] else 'off'}")
     train_datagen = ImageDataGenerator(
         rescale=1. / 255,
         shear_range=0.2,
@@ -58,3 +75,15 @@ if __name__ == "__main__":
 
     # Save the model
     model.save('danielckv-maskdetect-v1.12.h5')
+
+
+@cli_app.command
+@click.pass_context
+def train_svm(ctx):
+    click.echo(f"Debug is {'on' if ctx.obj['DEBUG'] else 'off'}")
+    # Train the SVM model
+    pass
+
+
+if __name__ == "__main__":
+    cli_app(obj={})
